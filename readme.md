@@ -111,13 +111,15 @@ Docker Engine is running successfully.
 
 ---
 
-RUN REDIS CONTAINER
+**RUN REDIS CONTAINER**
 
 Command:
 
+```clipboard
 docker run --name redis-demo -p 6379:6379 -d redis
+```
 
-Explanation:
+*Explanation:*
 
 docker run
 → creates and starts container
