@@ -826,50 +826,233 @@ to avoid unnecessary memory usage in Redis.
 
 ## Command Cheatsheet
 
-Copy all commands from the block below:
+Each command is provided in its own copy-ready block.
+
+### Docker commands
+
+Use these Docker commands to install, run, and manage your Redis container on Windows.
+
+**Check Docker version**
 
 ```clipboard
-# Docker commands
-
 docker --version
+```
+
+**List running containers**
+
+```clipboard
 docker ps
+```
+
+**List all containers**
+
+```clipboard
 docker ps -a
+```
+
+**Download and start Redis container**
+
+```clipboard
 docker run --name redis-demo -p 6379:6379 -d redis
+```
+
+**Start Redis container**
+
+```clipboard
 docker start redis-demo
+```
+
+**Stop Redis container**
+
+```clipboard
 docker stop redis-demo
+```
+
+**Restart Redis container**
+
+```clipboard
 docker restart redis-demo
+```
+
+**Remove Redis container**
+
+```clipboard
 docker rm redis-demo
+```
+
+**Remove Redis container forcefully**
+
+```clipboard
 docker rm -f redis-demo
+```
+
+**Open Redis CLI inside container**
+
+```clipboard
 docker exec -it redis-demo redis-cli
+```
+
+**View container logs**
+
+```clipboard
 docker logs redis-demo
+```
+
+**View live container logs**
+
+```clipboard
 docker logs -f redis-demo
+```
+
+**List Docker images**
+
+```clipboard
 docker images
+```
+
+**Remove Redis image**
+
+```clipboard
 docker rmi redis
+```
+
+**Inspect Redis container**
+
+```clipboard
 docker inspect redis-demo
+```
 
-# Redis CLI commands
+### Redis CLI commands
 
+Use these Redis CLI commands to test Redis health, store and retrieve data, manage keys, and inspect server state.
+
+**Test Redis server**
+
+```clipboard
 PING
+```
+
+**Store data**
+
+```clipboard
 SET name Sandeep
+```
+
+**Get data**
+
+```clipboard
 GET name
+```
+
+**Delete key**
+
+```clipboard
 DEL name
+```
+
+**List all keys**
+
+```clipboard
 KEYS *
+```
+
+**Check if key exists**
+
+```clipboard
 EXISTS name
+```
+
+**Set expiry on key**
+
+```clipboard
 EXPIRE name 60
+```
+
+**Store key with expiry**
+
+```clipboard
 SET otp 1234 EX 60
+```
+
+**Check remaining TTL**
+
+```clipboard
 TTL otp
+```
+
+**Remove expiry**
+
+```clipboard
 PERSIST otp
+```
+
+**Show exact expire time**
+
+```clipboard
 EXPIRETIME otp
+```
+
+**Clear all data**
+
+```clipboard
 FLUSHALL
+```
+
+**Show Redis info**
+
+```clipboard
 INFO
+```
+
+**Show memory info**
+
+```clipboard
 INFO memory
+```
+
+**Check persistence settings**
+
+```clipboard
 CONFIG GET save
+```
+
+```clipboard
 CONFIG GET appendonly
+```
+
+**Increment value**
+
+```clipboard
 INCR count
+```
+
+**Decrement value**
+
+```clipboard
 DECR count
+```
+
+**Show keyspace info**
+
+```clipboard
 INFO keyspace
+```
+
+**Switch database**
+
+```clipboard
 SELECT 1
+```
+
+**Get multiple values**
+
+```clipboard
 MGET key1 key2
+```
+
+**Store multiple values**
+
+```clipboard
 MSET key1 value1 key2 value2
 ```
 
