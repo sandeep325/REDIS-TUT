@@ -228,13 +228,15 @@ await client.connect();
 
 ---
 
-INSTALL REDIS PACKAGE IN NODE.JS
 
+**INSTALL REDIS PACKAGE IN NODE.JS**
+```clipboard
 npm install redis
+```
 
 ---
 
-PROJECT SETUP
+**PROJECT SETUP**
 
 From the project root, install dependencies and start the Node.js server:
 
