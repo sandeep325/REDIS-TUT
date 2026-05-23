@@ -143,37 +143,33 @@ redis-demo container running on port 6379.
 
 ---
 
-OPEN REDIS CLI
+**OPEN REDIS CLI**
 
-**Command:**
+*Command:*
 
-**>>>docker exec -it redis-demo redis-cli**
+```clipboard
+docker exec -it redis-demo redis-cli
+```
 
-Explanation:
+*Explanation:*
 
-docker exec
-→ runs command inside container
-
--it
-→ interactive terminal mode
-
-redis-demo
-→ container name
-
-redis-cli
-→ Redis command line interface
+- `docker exec` → runs command inside container
+- `-it` → interactive terminal mode
+- `redis-demo` → container name
+- `redis-cli` → Redis command line interface
 
 ---
 
-TEST REDIS WORKING
+**TEST REDIS WORKING**
 
-**Inside redis-cli run:**
+*Inside redis-cli run:*
+```clipboard
+ping
+```
 
-**>>>ping**
+*Expected Output:*
 
-Expected Output:
-
-PONG
+- `PONG`
 
 Meaning:
 Redis server is working successfully.
