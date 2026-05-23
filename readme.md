@@ -129,15 +129,16 @@ docker run --name redis-demo -p 6379:6379 -d redis
 
 ---
 
-VERIFY REDIS CONTAINER
+**VERIFY REDIS CONTAINER**
 
 Run:
-
+```clipboard
 docker ps
+```
 
 Redis container should appear in running containers list.
 
-Example:
+`Example:`
 redis-demo container running on port 6379.
 
 ---
