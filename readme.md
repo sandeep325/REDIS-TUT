@@ -822,163 +822,57 @@ Always use TTL for:
 
 to avoid unnecessary memory usage in Redis.
 
+---
 
+## Command Cheatsheet
 
+Copy all commands from the block below:
 
-------
-COMMAND FOR DOCKER/REDIS
-
-REDIS + DOCKER + NODE.JS IMPORTANT COMMANDS CHEATSHEET
-
-DOCKER COMMANDS
-
-CHECK DOCKER VERSION
+```clipboard
+# Docker commands
 
 docker --version
-
-CHECK RUNNING CONTAINERS
-
 docker ps
-
-CHECK ALL CONTAINERS
-
 docker ps -a
-
-DOWNLOAD AND START REDIS CONTAINER
-
 docker run --name redis-demo -p 6379:6379 -d redis
-
-START REDIS CONTAINER
-
 docker start redis-demo
-
-STOP REDIS CONTAINER
-
 docker stop redis-demo
-
-RESTART REDIS CONTAINER
-
 docker restart redis-demo
-
-REMOVE REDIS CONTAINER
-
 docker rm redis-demo
-
-REMOVE FORCEFULLY
-
 docker rm -f redis-demo
-
-OPEN REDIS CLI
-
 docker exec -it redis-demo redis-cli
-
-VIEW CONTAINER LOGS
-
 docker logs redis-demo
-
-VIEW LIVE LOGS
-
 docker logs -f redis-demo
-
-CHECK REDIS IMAGE
-
 docker images
-
-REMOVE REDIS IMAGE
-
 docker rmi redis
-
-CHECK CONTAINER DETAILS
-
 docker inspect redis-demo
 
-REDIS CLI COMMANDS
-
-TEST REDIS
+# Redis CLI commands
 
 PING
-
-Output:
-
-PONG
-
-STORE DATA
-
 SET name Sandeep
-
-GET DATA
-
 GET name
-
-DELETE DATA
-
 DEL name
-
-CHECK ALL KEYS
-
 KEYS *
-
-CHECK KEY EXISTS
-
 EXISTS name
-
-SET EXPIRY
-
 EXPIRE name 60
-
-STORE WITH EXPIRY
-
 SET otp 1234 EX 60
-
-CHECK REMAINING TTL
-
 TTL otp
-
-REMOVE EXPIRY
-
 PERSIST otp
-
-CLEAR ALL DATA
-
+EXPIRETIME otp
 FLUSHALL
-
-CHECK REDIS INFO
-
 INFO
-
-CHECK MEMORY INFO
-
 INFO memory
-
-CHECK PERSISTENCE
-
 CONFIG GET save
-
 CONFIG GET appendonly
-
-INCREMENT VALUE
-
 INCR count
-
-DECREMENT VALUE
-
 DECR count
-
-LIST ALL DATABASES
-
 INFO keyspace
-
-CHANGE DATABASE
-
 SELECT 1
-
-GET ALL VALUES
-
 MGET key1 key2
-
-STORE MULTIPLE VALUES
-
 MSET key1 value1 key2 value2
+```
+
 
 
 
