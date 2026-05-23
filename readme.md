@@ -268,19 +268,32 @@ Example `POST /set` request body:
 
 ---
 
-HOW DATA FLOW WORKS
+**HOW DATA FLOW WORKS**
 
+```text
 Node.js Application
-|
+   |
+   v
 localhost:6379
-|
+   |
+   v
 Docker Container
-|
+   |
+   v
 Redis Server Running
+```
+
+This graph shows the request flow from the Node.js application to Redis:
+
+* The application sends Redis commands to `localhost:6379`.
+* Docker maps that port to the Redis container.
+* The Redis server inside the container receives and processes the commands.
+
+This makes Redis an external service for Node.js, with data managed independently in the Redis process.
 
 ---
 
-ADVANTAGES OF USING REDIS
+**ADVANTAGES OF USING REDIS**
 
 1. Extremely fast
 2. In-memory storage
