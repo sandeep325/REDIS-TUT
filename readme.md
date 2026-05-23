@@ -176,27 +176,33 @@ Redis server is working successfully.
 
 ---
 
-IMPORTANT DOCKER COMMANDS
 
-See running containers:
+## IMPORTANT DOCKER COMMANDS ##
 
-docker ps
+*See running containers:*  
+```clipboard
+ docker ps
+   ```
 
-See all containers:
-
+*See all containers:*
+```clipboard
 docker ps -a
+```
 
-Stop Redis container:
-
+*Stop Redis container:*
+```clipboard
 docker stop redis-demo
+```
 
-Start Redis container:
-
+*Start Redis container:*
+```clipboard
 docker start redis-demo
+```
 
-Remove Redis container:
-
+*Remove Redis container:*
+```clipboard
 docker rm redis-demo
+```
 
 ---
 
