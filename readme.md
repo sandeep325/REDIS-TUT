@@ -121,20 +121,11 @@ docker run --name redis-demo -p 6379:6379 -d redis
 
 *Explanation:*
 
-docker run
-→ creates and starts container
-
---name redis-demo
-→ container name
-
--p 6379:6379
-→ maps Redis port to local machine
-
--d
-→ runs container in detached/background mode
-
-redis
-→ official Redis image from Docker Hub
+- `docker run` → **creates and starts container**
+- `--name redis-demo` → **container name**
+- `-p 6379:6379` → **maps Redis port to local machine**
+- `-d` → **runs container in detached/background mode**
+- `redis` → **official Redis image from Docker Hub**
 
 ---
 
