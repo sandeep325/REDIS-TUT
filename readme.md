@@ -1,4 +1,960 @@
-TEST
+WHY WE USED DOCKER FOR REDIS
+
+Redis does not officially support native installation on Windows properly.
+So, for learning and development purposes, we used Docker to run Redis inside a containerized environment.
+
+Docker provides an isolated lightweight environment where applications can run consistently across systems.
+
+---
+
+WHAT IS DOCKER?
+
+Docker is a containerization platform used to package and run applications inside containers.
+
+Containers are lightweight isolated environments that include:
+
+* application
+* dependencies
+* runtime
+
+This helps developers run software consistently on any machine.
+
+---
+
+WHY DO WE USE DOCKER FOR REDIS?
+
+We use Docker for Redis because:
+
+1. Easy setup
+   Redis can start with a single command.
+
+2. No manual installation
+   No need to install Redis directly on Windows.
+
+3. Production-like environment
+   Most real-world companies run Redis inside containers.
+
+4. Isolation
+   Redis runs independently without affecting the local system.
+
+5. Portability
+   Same setup works on any developer machine.
+
+---
+
+DOCKER + WSL ISSUE WE FACED
+
+Initially Docker commands failed with error:
+
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine
+
+Reason:
+Docker Desktop requires WSL2 (Windows Subsystem for Linux) on Windows.
+
+Problem was:
+
+* WSL outdated or not installed properly.
+
+---
+
+HOW WE FIXED THE ISSUE
+
+Step 1:
+Opened PowerShell as Administrator.
+
+Step 2:
+Ran command:
+
+wsl --update
+
+Step 3:
+Restarted the system.
+
+Step 4:
+Opened Docker Desktop again.
+
+After restart Docker Engine started successfully.
+
+---
+
+VERIFY DOCKER IS RUNNING
+
+Command:
+
+docker ps
+
+If no error comes:
+Docker Engine is running successfully.
+
+---
+
+RUN REDIS CONTAINER
+
+Command:
+
+docker run --name redis-demo -p 6379:6379 -d redis
+
+Explanation:
+
+docker run
+→ creates and starts container
+
+--name redis-demo
+→ container name
+
+-p 6379:6379
+→ maps Redis port to local machine
+
+-d
+→ runs container in detached/background mode
+
+redis
+→ official Redis image from Docker Hub
+
+---
+
+VERIFY REDIS CONTAINER
+
+Run:
+
+docker ps
+
+Redis container should appear in running containers list.
+
+Example:
+redis-demo container running on port 6379.
+
+---
+
+OPEN REDIS CLI
+
+**Command:**
+
+**>>>docker exec -it redis-demo redis-cli**
+
+Explanation:
+
+docker exec
+→ runs command inside container
+
+-it
+→ interactive terminal mode
+
+redis-demo
+→ container name
+
+redis-cli
+→ Redis command line interface
+
+---
+
+TEST REDIS WORKING
+
+**Inside redis-cli run:**
+
+**>>>ping**
+
+Expected Output:
+
+PONG
+
+Meaning:
+Redis server is working successfully.
+
+---
+
+IMPORTANT DOCKER COMMANDS
+
+See running containers:
+
+docker ps
+
+See all containers:
+
+docker ps -a
+
+Stop Redis container:
+
+docker stop redis-demo
+
+Start Redis container:
+
+docker start redis-demo
+
+Remove Redis container:
+
+docker rm redis-demo
+
+---
+
+REDIS DEFAULT PORT
+
+6379
+
+---
+
+HOW NODE.JS CONNECTS TO REDIS
+
+Node.js application connects using:
+
+redis://localhost:6379
+
+Example:
+
+const redis = require("redis");
+
+const client = redis.createClient({
+url: "redis://localhost:6379"
+});
+
+await client.connect();
+
+---
+
+INSTALL REDIS PACKAGE IN NODE.JS
+
+npm install redis
+
+---
+
+HOW DATA FLOW WORKS
+
+Node.js Application
+|
+localhost:6379
+|
+Docker Container
+|
+Redis Server Running
+
+---
+
+ADVANTAGES OF USING REDIS
+
+1. Extremely fast
+2. In-memory storage
+3. Used for caching
+4. Session management
+5. Real-time applications
+6. Queue management
+7. Rate limiting
+
+---
+
+COMMON REAL-WORLD USE CASES
+
+* API caching
+* OTP storage
+* Session storage
+* Chat applications
+* Leaderboards
+* Background jobs
+* Real-time analytics
+
+---
+
+IMPORTANT INTERVIEW EXPLANATION
+
+“We used Docker to run Redis because Redis works more reliably in a Linux-based container environment on Windows systems. Docker also provides an easy, isolated, and production-like setup for development and practice.”
+
+---
+
+COMPLETE FLOW SUMMARY
+
+1. Installed Docker Desktop
+2. Faced Docker Engine issue
+3. Updated WSL using:
+   wsl --update
+4. Restarted system
+5. Opened Docker Desktop
+6. Verified Docker using:
+   docker ps
+7. Started Redis container
+8. Verified Redis container running
+9. Opened Redis CLI
+10. Tested Redis using:
+    ping
+11. Connected Redis with Node.js application
+
+---
+
+
+QUESTION
+
+If Node.js server restarts, will Redis data be deleted?
+
+ANSWER
+
+No.
+
+Restarting the Node.js server does NOT delete Redis data.
+
+Reason:
+Node.js application and Redis server are separate processes/services.
+
+Redis stores data independently in its own memory.
+
+---
+
+EXPLANATION
+
+Architecture:
+
+Node.js Server
+|
+Redis Client
+|
+Redis Server
+
+Node.js only connects to Redis.
+
+Actual data is stored inside Redis server memory, not inside Node.js application memory.
+
+---
+IMPORTANT UNDERSTANDING
+
+Node.js Restart
+→ Does NOT remove Redis data
+
+Redis Restart
+→ May remove data depending on persistence configuration
+
+Container Remove
+→ Data deleted
+
+---
+
+DOCKER EXAMPLE
+
+If Redis container is only stopped:
+
+docker stop redis-demo
+
+and restarted:
+
+docker start redis-demo
+
+Data usually remains.
+
+BUT IF CONTAINER IS REMOVED
+
+docker rm redis-demo
+
+Then Redis data is lost because container is deleted.
+
+---
+
+
+WHY DATA SURVIVES NODE.JS RESTART
+
+Because:
+
+Redis is an external cache/database service
+Node.js is only client application
+Data lifecycle depends on Redis server, not Node.js process
+
+------
+
+IMPORTANT INTERVIEW LINE
+
+“Node.js restart does not affect Redis data because Redis runs as a separate service. The application only connects to Redis, while the actual cached data is maintained independently inside the Redis server.”
+
+------
+
+SCENARIO 1
+
+Question:
+
+If Node.js application restarts on AWS, will Redis data be lost?
+
+ANSWER
+
+No.
+
+Restarting the Node.js application does NOT delete Redis data.
+
+Reason:
+
+Node.js application and Redis are separate services.
+Redis stores data independently.
+
+------
+
+
+ARCHITECTURE
+
+Node.js Application (EC2/ECS/Lambda)
+|
+AWS Redis (Elasticache Redis)
+|
+Data Stored In Redis Memory
+
+------
+
+SCENARIO 2
+
+Question:
+
+If EC2 server restarts, will Redis data be lost?
+
+ANSWER DEPENDS ON REDIS LOCATION
+
+CASE 2:
+Using AWS Elasticache Redis (MOST COMMON)
+
+Example:
+
+Node.js app on EC2
+Redis on AWS Elasticache
+
+Then:
+
+Restarting EC2 does NOT affect Redis data.
+
+Reason:
+Elasticache Redis runs on separate AWS-managed infrastructure.
+
+
+------
+
+ARCHITECTURE
+
+EC2 (Node.js App)
+|
+Elasticache Redis
+|
+Redis Data Independent
+
+------
+   **REDIS PERSISTENCE EXPLAINED IN DETAIL**
+
+WHAT IS PERSISTENCE IN REDIS?
+
+Persistence means:
+
+Redis saves in-memory data permanently to disk/storage so that data can survive:
+
+Redis restart
+server reboot
+crash
+power failure
+
+WITHOUT PERSISTENCE
+
+Redis stores data only in RAM.
+
+RAM is temporary memory.
+
+If Redis server stops or crashes:
+→ data may be lost.
+
+WITH PERSISTENCE
+
+Redis periodically saves data to disk.
+
+If Redis restarts:
+→ data can be restored from saved files.
+
+IMPORTANT UNDERSTANDING
+
+RAM
+→ Fast but temporary
+
+Disk/Storage
+→ Slower but permanent
+
+Persistence helps Redis recover RAM data after restart.
+
+------
+
+**REDIS TIME EXPIRY (TTL - TIME TO LIVE)**
+
+
+---
+
+WHAT IS TIME EXPIRY IN REDIS?
+
+Time expiry means:
+
+Redis automatically deletes data after a specific time.
+
+This is called:
+
+* TTL (Time To Live)
+* Expiration Time
+
+---
+
+WHY TIME EXPIRY IS USED?
+
+Used for temporary data like:
+
+* OTPs
+* login sessions
+* API cache
+* access tokens
+* rate limiting
+* temporary verification data
+
+---
+
+EXAMPLE
+
+Store OTP for 60 seconds.
+
+After 60 seconds:
+Redis automatically removes it.
+
+---
+
+HOW TO SET EXPIRY IN REDIS
+
+---
+
+METHOD 1: USING EXPIRE COMMAND
+
+STEP 1:
+Store data.
+
+SET otp 1234
+
+---
+
+STEP 2:
+Set expiry.
+
+EXPIRE otp 60
+
+Meaning:
+Delete key after 60 seconds.
+
+---
+
+METHOD 2: SET WITH EX OPTION (MOST COMMON)
+
+SET otp 1234 EX 60
+
+Meaning:
+
+* store data
+* expire after 60 seconds
+
+Single command.
+
+---
+
+NODE.JS EXAMPLE
+
+await client.set("otp", "1234", {
+EX: 60
+});
+
+---
+
+EXPLANATION
+
+"otp"
+→ key
+
+"1234"
+→ value
+
+EX: 60
+→ expiry time in seconds
+
+---
+
+CHECK REMAINING TIME
+
+TTL otp
+
+Example Output:
+
+45
+
+Meaning:
+45 seconds remaining before deletion.
+
+---
+
+WHEN TIME EXPIRES
+
+After expiry:
+
+GET otp
+
+Output:
+
+(nil)
+
+Meaning:
+Data deleted automatically.
+
+---
+
+IMPORTANT INTERVIEW LINE
+
+“Redis TTL (Time To Live) is used to automatically expire and remove keys after a configured duration.”
+
+---
+
+REAL-WORLD SCENARIOS
+
+---
+
+1. OTP SYSTEM
+
+SET otp:1234 5678 EX 120
+
+Meaning:
+OTP valid for 2 minutes.
+
+---
+
+2. USER SESSION
+
+SET session:user1 token123 EX 3600
+
+Meaning:
+Session expires after 1 hour.
+
+---
+
+3. API CACHE
+
+SET products_api cachedResponse EX 300
+
+Meaning:
+Cache refresh every 5 minutes.
+
+---
+
+4. RATE LIMITING
+
+SET user:count 1 EX 60
+
+Meaning:
+Count resets every minute.
+
+---
+
+IMPORTANT UNDERSTANDING
+
+Redis automatically handles cleanup.
+
+No manual delete required.
+
+---
+
+TTL COMMANDS
+
+---
+
+Set Expiry:
+
+EXPIRE key seconds
+
+---
+
+Check Remaining Time:
+
+TTL key
+
+---
+
+Remove Expiry:
+
+PERSIST key
+
+---
+
+See Exact Expiry Time:
+
+EXPIRETIME key
+
+---
+
+NODE.JS PRACTICAL EXAMPLE
+
+---
+
+STORE DATA WITH EXPIRY
+
+app.post("/set", async (req, res) => {
+
+```
+const { key, value } = req.body;
+
+await client.set(key, value, {
+    EX: 60
+});
+
+res.json({
+    success: true,
+    message: "Data stored with 60 sec expiry"
+});
+```
+
+});
+
+---
+
+CHECK TTL
+
+app.get("/ttl/:key", async (req, res) => {
+
+```
+const ttl = await client.ttl(req.params.key);
+
+res.json({
+    ttl
+});
+```
+
+});
+
+---
+
+IMPORTANT TTL VALUES
+
+TTL Result Meaning:
+
+-2
+→ key does not exist
+
+-1
+→ key exists but no expiry set
+
+Positive Number
+→ remaining seconds
+
+---
+
+INTERVIEW QUESTION
+
+Question:
+Why is Redis TTL important?
+
+Answer:
+TTL helps automatically clean temporary cache/session data and prevents unnecessary memory usage.
+
+---
+
+IMPORTANT PRODUCTION USE CASE
+
+Example:
+
+API response caching.
+
+First request:
+
+* fetch data from DB
+* store in Redis with TTL
+
+Next requests:
+
+* return data from Redis
+
+After TTL expires:
+
+* cache refreshes automatically
+
+---
+
+CACHE FLOW
+
+Client Request
+|
+Check Redis Cache
+|
+If Exists:
+Return Cached Data
+|
+If Not Exists:
+Fetch From DB
+|
+Store In Redis With TTL
+|
+Return Response
+
+---
+
+BEST PRACTICE
+
+Always use TTL for:
+
+* cache
+* OTP
+* temporary tokens
+* rate limiting
+
+to avoid unnecessary memory usage in Redis.
+
+
+
+
+------
+COMMAND FOR DOCKER/REDIS
+
+REDIS + DOCKER + NODE.JS IMPORTANT COMMANDS CHEATSHEET
+
+DOCKER COMMANDS
+
+CHECK DOCKER VERSION
+
+docker --version
+
+CHECK RUNNING CONTAINERS
+
+docker ps
+
+CHECK ALL CONTAINERS
+
+docker ps -a
+
+DOWNLOAD AND START REDIS CONTAINER
+
+docker run --name redis-demo -p 6379:6379 -d redis
+
+START REDIS CONTAINER
+
+docker start redis-demo
+
+STOP REDIS CONTAINER
+
+docker stop redis-demo
+
+RESTART REDIS CONTAINER
+
+docker restart redis-demo
+
+REMOVE REDIS CONTAINER
+
+docker rm redis-demo
+
+REMOVE FORCEFULLY
+
+docker rm -f redis-demo
+
+OPEN REDIS CLI
+
+docker exec -it redis-demo redis-cli
+
+VIEW CONTAINER LOGS
+
+docker logs redis-demo
+
+VIEW LIVE LOGS
+
+docker logs -f redis-demo
+
+CHECK REDIS IMAGE
+
+docker images
+
+REMOVE REDIS IMAGE
+
+docker rmi redis
+
+CHECK CONTAINER DETAILS
+
+docker inspect redis-demo
+
+REDIS CLI COMMANDS
+
+TEST REDIS
+
+PING
+
+Output:
+
+PONG
+
+STORE DATA
+
+SET name Sandeep
+
+GET DATA
+
+GET name
+
+DELETE DATA
+
+DEL name
+
+CHECK ALL KEYS
+
+KEYS *
+
+CHECK KEY EXISTS
+
+EXISTS name
+
+SET EXPIRY
+
+EXPIRE name 60
+
+STORE WITH EXPIRY
+
+SET otp 1234 EX 60
+
+CHECK REMAINING TTL
+
+TTL otp
+
+REMOVE EXPIRY
+
+PERSIST otp
+
+CLEAR ALL DATA
+
+FLUSHALL
+
+CHECK REDIS INFO
+
+INFO
+
+CHECK MEMORY INFO
+
+INFO memory
+
+CHECK PERSISTENCE
+
+CONFIG GET save
+
+CONFIG GET appendonly
+
+INCREMENT VALUE
+
+INCR count
+
+DECREMENT VALUE
+
+DECR count
+
+LIST ALL DATABASES
+
+INFO keyspace
+
+CHANGE DATABASE
+
+SELECT 1
+
+GET ALL VALUES
+
+MGET key1 key2
+
+STORE MULTIPLE VALUES
+
+MSET key1 value1 key2 value2
+
+
+
+
+
+
+
+
 
 
 
