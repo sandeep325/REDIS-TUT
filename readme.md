@@ -98,11 +98,13 @@ After restart Docker Engine started successfully.
 
 ---
 
-VERIFY DOCKER IS RUNNING
+**VERIFY DOCKER IS RUNNING**
 
 Command:
 
+```clipboard
 docker ps
+```
 
 If no error comes:
 Docker Engine is running successfully.
