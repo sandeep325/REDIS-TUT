@@ -217,6 +217,38 @@ npm install redis
 
 ---
 
+PROJECT SETUP
+
+From the project root, install dependencies and start the Node.js server:
+
+```bash
+npm install
+node server.js
+```
+
+The API runs on port `3000` by default:
+
+```text
+http://localhost:3000
+```
+
+### Available API endpoints
+
+* `GET /` → health check
+* `POST /set` → save a key/value pair
+* `GET /get/:key` → retrieve a value by key
+
+Example `POST /set` request body:
+
+```json
+{
+  "key": "name",
+  "value": "Sandeep"
+}
+```
+
+---
+
 HOW DATA FLOW WORKS
 
 Node.js Application
