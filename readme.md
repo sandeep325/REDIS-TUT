@@ -19,7 +19,7 @@ That makes operations often complete in:
 * low milliseconds
 
 
-WHY WE USED DOCKER FOR REDIS
+## WHY WE USED DOCKER FOR REDIS
 
 Redis does not officially support native installation on Windows properly.
 So, for learning and development purposes, we used Docker to run Redis inside a containerized environment.
@@ -28,7 +28,7 @@ Docker provides an isolated lightweight environment where applications can run c
 
 ---
 
-WHAT IS DOCKER?
+## WHAT IS DOCKER?
 
 Docker is a containerization platform used to package and run applications inside containers.
 
@@ -42,7 +42,7 @@ This helps developers run software consistently on any machine.
 
 ---
 
-WHY DO WE USE DOCKER FOR REDIS?
+## WHY DO WE USE DOCKER FOR REDIS?
 
 We use Docker for Redis because:
 
@@ -63,7 +63,7 @@ We use Docker for Redis because:
 
 ---
 
-DOCKER + WSL ISSUE WE FACED
+##  DOCKER + WSL ISSUE WE FACED  (IF)
 
 Initially Docker commands failed with error:
 
@@ -78,7 +78,7 @@ Problem was:
 
 ---
 
-HOW WE FIXED THE ISSUE
+ # HOW WE FIXED THE ISSUE
 
 Step 1:
 Opened PowerShell as Administrator.
