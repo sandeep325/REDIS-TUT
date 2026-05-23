@@ -205,11 +205,7 @@ docker rm redis-demo
 ```
 
 ---
-
-REDIS DEFAULT PORT
-
-6379
-
+**REDIS DEFAULT PORT**  `6379`
 ---
 
 HOW NODE.JS CONNECTS TO REDIS
