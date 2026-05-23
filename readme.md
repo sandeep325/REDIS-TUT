@@ -206,16 +206,17 @@ docker rm redis-demo
 
 ---
 **REDIS DEFAULT PORT**  `6379`
+
 ---
 
-HOW NODE.JS CONNECTS TO REDIS
+## HOW NODE.JS CONNECTS TO REDIS ##
 
 Node.js application connects using:
 
 redis://localhost:6379
 
-Example:
-
+*Example:*
+```clipboard
 const redis = require("redis");
 
 const client = redis.createClient({
@@ -223,6 +224,7 @@ url: "redis://localhost:6379"
 });
 
 await client.connect();
+```
 
 ---
 
