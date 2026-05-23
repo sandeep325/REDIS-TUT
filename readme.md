@@ -3,6 +3,21 @@
 # REDIS + DOCKER + NODE.JS
 ## COMPLETE NOTES
 
+## What is Redis?
+
+Redis is an in-memory database used for fast data storage and retrieval.
+
+It stores data in RAM instead of disk, so it is extremely fast.
+
+## Why Redis is fast
+
+Redis stores data primarily in memory (RAM) rather than reading from disk each time.
+
+That makes operations often complete in:
+
+* microseconds
+* low milliseconds
+
 
 WHY WE USED DOCKER FOR REDIS
 
