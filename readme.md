@@ -1,3 +1,9 @@
+![Redis](https://img.shields.io/badge/Redis-FF3C00?style=for-the-badge&logo=redis&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+
+# REDIS + DOCKER + NODE.JS
+## COMPLETE NOTES
+
+
 WHY WE USED DOCKER FOR REDIS
 
 Redis does not officially support native installation on Windows properly.
@@ -825,8 +831,6 @@ to avoid unnecessary memory usage in Redis.
 ---
 
 ## Command Cheatsheet
-
-Each command is provided in its own copy-ready block.
 
 ### Docker commands
 
