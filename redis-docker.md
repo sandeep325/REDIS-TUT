@@ -40,6 +40,10 @@ Containers are lightweight isolated environments that include:
 
 This helps developers run software consistently on any machine.
 
+Download Docker Desktop:
+
+https://www.docker.com/products/docker-desktop/?utm_source=chatgpt.com
+
 ---
 
 ## WHY DO WE USE DOCKER FOR REDIS?
