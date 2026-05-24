@@ -42,7 +42,7 @@ This helps developers run software consistently on any machine.
 
 Download Docker Desktop:
 
-https://www.docker.com/products/docker-desktop/?utm_source=chatgpt.com
+[Download Docker Desktop](https://www.docker.com/products/docker-desktop/?utm_source=chatgpt.com)
 
 ---
 
