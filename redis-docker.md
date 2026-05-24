@@ -257,15 +257,35 @@ http://localhost:3000
 * `POST /set` → save a key/value pair
 * `GET /get/:key` → retrieve a value by key
 
-Example `POST /set` request body:
+**Test API**
+**1.** Example `POST /set` request body:
 
 ```json
 {
   "key": "name",
-  "value": "Sandeep"
+  "value": "Admin"
+}
+```
+ Example `POST /set` Response body:
+```json
+{
+  "success": true,
+  "message": "Data stored in Redis"
 }
 ```
 
+**2.** Example `GET /get/:key` request:
+```json
+curl http://localhost:3000/get/name
+```
+
+ Example `GET /get/:key` Response body:
+```json
+{
+  "success": true,
+  "data": "Admin"
+}
+```
 ---
 
 **HOW DATA FLOW WORKS**
