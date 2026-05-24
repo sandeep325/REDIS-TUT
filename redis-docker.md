@@ -337,13 +337,13 @@ COMMON REAL-WORLD USE CASES
 
 ---
 
-IMPORTANT INTERVIEW EXPLANATION
+## IMPORTANT NOTE:- ##
 
 “We used Docker to run Redis because Redis works more reliably in a Linux-based container environment on Windows systems. Docker also provides an easy, isolated, and production-like setup for development and practice.”
 
 ---
 
-COMPLETE FLOW SUMMARY
+## COMPLETE FLOW SUMMARY ##
 
 1. Installed Docker Desktop
 2. Faced Docker Engine issue
@@ -363,7 +363,7 @@ COMPLETE FLOW SUMMARY
 ---
 
 
-QUESTION
+**QUESTION**
 
 If Node.js server restarts, will Redis data be deleted?
 
